@@ -12,6 +12,10 @@
         var controlT;
         var controlH;
         var controlV;
+        var controlL;
+        var controlS;
+        var controlR;
+        var controlP;
         var lum;
         var windDir;
         var windSpeed;
@@ -73,19 +77,20 @@
             });
             controlV.setValue(0);
 
-            lum = new SegmentDisplay("Luminosity");
-            lum.pattern = "##.##";
-            lum.displayAngle = 6;
-            lum.digitHeight = 20;
-            lum.digitWidth = 14;
-            lum.digitDistance = 2.5;
-            lum.segmentWidth = 2;
-            lum.segmentDistance = 0.3;
-            lum.segmentCount = 7;
-            lum.cornerType = 3;
-            lum.colorOn = "#2421dd";
-            lum.colorOff = "#C1C1C1";
-            lum.draw();
+            controlL = new Gauge({
+                id: 'controlL', parentId: 'containerL',
+                width: 300, height: 300,
+                scalable: false, animated: true,
+                duration: 3, decimals: 2,
+                title: "Luminosity", unit: "w",
+                maxValue: 5,
+                sections: [{"start": "0", "stop": "1", "color": "#2976fa"},
+                    {"start": "1", "stop": "2", "color": "#29c0fa"},
+                    {"start": "2", "stop": "3", "color": "#29fa3d"},
+                    {"start": "3", "stop": "4", "color": "#ffd82a"},
+                    {"start": "4", "stop": "5", "color": "#ff312a"}]
+            });
+            controlL.setValue(0);
 
             windDir = new SegmentDisplay("windDir");
             windDir.pattern = "###";
@@ -97,61 +102,65 @@
             windDir.segmentDistance = 0.3;
             windDir.segmentCount = 7;
             windDir.cornerType = 3;
-            windDir.colorOn = "#2421dd";
+            //windDir.colorOn = "#2421dd";
             //windDir.colorOff = "#1b0532";
+            windDir.colorOn = "#1b0532";
             windDir.colorOff = "#C1C1C1";
             windDir.draw();
 
-            windSpeed = new SegmentDisplay("windSpeed");
-            windSpeed.pattern = "##.##";
-            windSpeed.displayAngle = 6;
-            windSpeed.digitHeight = 20;
-            windSpeed.digitWidth = 14;
-            windSpeed.digitDistance = 2.5;
-            windSpeed.segmentWidth = 2;
-            windSpeed.segmentDistance = 0.3;
-            windSpeed.segmentCount = 7;
-            windSpeed.cornerType = 3;
-            windSpeed.colorOn = "#2421dd";
-            windSpeed.colorOff = "#C1C1C1";
-            windSpeed.draw();
+            controlS = new Gauge({
+                id: 'controlS', parentId: 'containerS',
+                width: 300, height: 300,
+                scalable: false, animated: true,
+                duration: 3, decimals: 2,
+                title: "Wind Speed", unit: "mph",
+                maxValue: 100,
+                sections: [{"start": "0", "stop": "20", "color": "#2976fa"},
+                    {"start": "20", "stop": "40", "color": "#29c0fa"},
+                    {"start": "40", "stop": "60", "color": "#29fa3d"},
+                    {"start": "60", "stop": "80", "color": "#ffd82a"},
+                    {"start": "80", "stop": "100", "color": "#ff312a"}]
+            });
+            controlS.setValue(0);
 
-            rainfall = new SegmentDisplay("rainfall");
-            rainfall.pattern = "#.##";
-            rainfall.displayAngle = 6;
-            rainfall.digitHeight = 20;
-            rainfall.digitWidth = 14;
-            rainfall.digitDistance = 2.5;
-            rainfall.segmentWidth = 2;
-            rainfall.segmentDistance = 0.3;
-            rainfall.segmentCount = 7;
-            rainfall.cornerType = 3;
-            rainfall.colorOn = "#2421dd";
-            rainfall.colorOff = "#C1C1C1";
-            rainfall.draw();
+            controlR = new Gauge({
+                id: 'controlR', parentId: 'containerR',
+                width: 300, height: 300,
+                scalable: false, animated: true,
+                duration: 3, decimals: 2,
+                title: "Rainfall", unit: "in",
+                maxValue: 10,
+                sections: [{"start": "0", "stop": "2", "color": "#2976fa"},
+                    {"start": "2", "stop": "4", "color": "#29c0fa"},
+                    {"start": "4", "stop": "6", "color": "#29fa3d"},
+                    {"start": "6", "stop": "8", "color": "#ffd82a"},
+                    {"start": "8", "stop": "10", "color": "#ff312a"}]
+            });
+            controlR.setValue(0);
 
-            pressure = new SegmentDisplay("pressure");
-            pressure.pattern = "######";
-            pressure.displayAngle = 6;
-            pressure.digitHeight = 20;
-            pressure.digitWidth = 14;
-            pressure.digitDistance = 2.5;
-            pressure.segmentWidth = 2;
-            pressure.segmentDistance = 0.3;
-            pressure.segmentCount = 7;
-            pressure.cornerType = 3;
-            pressure.colorOn = "#2421dd";
-            pressure.colorOff = "#C1C1C1";
-            pressure.draw();
+            controlP = new Gauge({
+                id: 'controlP', parentId: 'containerP',
+                width: 300, height: 300,
+                scalable: false, animated: true,
+                duration: 3, decimals: 0,
+                title: "Pressure", unit: "Pa",
+                maxValue: 125000,
+                sections: [{"start": "0", "stop": "25000", "color": "#2976fa"},
+                    {"start": "25000", "stop": "50000", "color": "#29c0fa"},
+                    {"start": "50000", "stop": "75000", "color": "#29fa3d"},
+                    {"start": "75000", "stop": "100000", "color": "#ffd82a"},
+                    {"start": "100000", "stop": "125000", "color": "#ff312a"}]
+            });
+            controlP.setValue(0);
 
             document.getElementById("sensorT").style.display = "block";
             document.getElementById("sensorH").style.display = "block";
             document.getElementById("sensorV").style.display = "block";
-            document.getElementById("sensorL").style.display="block";
-            document.getElementById("sensorWD").style.display="block";
-            document.getElementById("sensorWS").style.display="block";
-            document.getElementById("sensorR").style.display="block";
-            document.getElementById("sensorP").style.display="block";
+            document.getElementById("sensorL").style.display = "block";
+            document.getElementById("sensorD").style.display = "block";
+            document.getElementById("sensorS").style.display = "block";
+            document.getElementById("sensorR").style.display = "block";
+            document.getElementById("sensorP").style.display = "block";
 
             webSocketControl = new WebSocket(IPControl);
 
@@ -224,15 +233,11 @@
             gVolt.append(time, parseFloat(json.volts));
 //                gAmps.append(time, 1000*parseFloat(json.amps));
 
-            lum.setValue(pad(parseFloat(json.lum).toString(), 4));
-
+            controlL.setValue(json.lum);
             windDir.setValue(pad((json.windDir).toString(), 3));
-
-            windSpeed.setValue(pad(parseFloat(json.windSpeed).toString(),);
-
-            rainfall.setValue(parseFloat(json.rainfall));
-
-            pressure.setValue(pad((json.pressure).toString(), 6));
+            controlS.setValue(json.windSpeed);
+            controlR.setValue(json.rainfall);
+            controlP.setValue(json.pressure);
 
             if (json.status !== null) {
                 var st = parseInt(json.status);
@@ -424,7 +429,35 @@
         }
 
         function pad(value, length) {
-            return (value.toString().length < length) ? pad("0"+value, length) : value;
+            return (value.toString().length < length) ? pad("0" + value, length) : value.toString();
+        }
+
+        function padL(value, length) {
+            return (value.toString().length < length) ? pad(" " + value, length) : value.toString();
+        }
+
+        function padR(value, length) {
+            return (value.toString().length < length) ? pad(value + "0", length) : value.toString();
+        }
+
+        function formatNumber(number, digitsLeftOfDecimal, digitsRightOfDecimal) {
+            var wholeNumber = Math.floor(number);
+            var decNumber = number % 1;
+            var leftNum, rightNum;
+
+            leftNum = wholeNumber.length < digitsLeftOfDecimal ? padL(wholeNumber, digitsLeftOfDecimal) : wholeNumber;
+
+            if (digitsRightOfDecimal === 0) {
+                return "" + leftNum;
+            } else {
+                if (decNumber.length < digitsRightOfDecimal) {
+                    rightNum = padR(decNumber, digitsRightOfDecimal);
+                } else {
+                    rightNum = decNumber.toFixed(digitsRightOfDecimal).toString();
+                }
+
+                return leftNum + "." + rightNum;
+            }
         }
     </script>
     <style>
@@ -459,6 +492,7 @@
             border-radius: 15px;
         }
     </style>
+
     <style id="intOnOffSwitch-style">
         /* http://proto.io/freebies/onoff/ */
 
@@ -546,6 +580,7 @@
         }
 
     </style>
+
     <style id="outSwitch-style">
         .outSwitch {
             position: relative;
@@ -569,10 +604,9 @@
             padding-left: 8px;
             padding-top: 10px;
         }
-
     </style>
-    <style id="extOnOffSwitch-style">
 
+    <style id="extOnOffSwitch-style">
         .extOnOffSwitch {
             position: relative;
             width: 100px;
@@ -655,8 +689,8 @@
         .extOnOffSwitch-checkbox:checked + .extOnOffSwitch-label .extOnOffSwitch-switch {
             right: 0px;
         }
-
     </style>
+
     <style id="camara-style">
         .image-video {
             width: 640px;
@@ -722,27 +756,26 @@
 </div>
 <div id="sensorL" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
     <div id='containerL' style='padding: 10px;'></div>
-    <canvas id="Luminosity" width="260" height="140"></canvas>
     <div style='margin-top: -30px; margin-left: 20px;'>Luminosity</div>
 </div>
-<div id="sensorWD" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerWD' style='padding: 10px;'></div>
-    <canvas id="windDir" width="260" height="140"></canvas>
-    <div style='margin-top: -30px; margin-left: 20px;'>Wind Direction</div>
+<div id="sensorD" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
+    <div id='containerD' style='padding: 10px;'></div>
+    <!--<canvas id="windDir" width="260" height="140"></canvas>-->
+    <canvas id="windDir" width="320" height="270"></canvas>
+    <!--<div style='text-align: left;'>Wind Direction</div>-->
+    <div style='margin-left: 20px;'>Wind Direction</div>
+    <!--<div style='margin-top: -30px; margin-left: 20px;'>Wind Direction</div>-->
 </div>
-<div id="sensorWS" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerWS' style='padding: 10px;'></div>
-    <canvas id="windSpeed" width="260" height="140"></canvas>
+<div id="sensorS" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
+    <div id='containerS' style='padding: 10px;'></div>
     <div style='margin-top: -30px; margin-left: 20px;'>Wind Speed</div>
 </div>
 <div id="sensorR" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
     <div id='containerR' style='padding: 10px;'></div>
-    <canvas id="rainfall" width="260" height="140"></canvas>
     <div style='margin-top: -30px; margin-left: 20px;'>Rainfall</div>
 </div>
 <div id="sensorP" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
     <div id='containerP' style='padding: 10px;'></div>
-    <canvas id="pressure" width="260" height="140"></canvas>
     <div style='margin-top: -30px; margin-left: 20px;'>Atmospheric Pressure</div>
 </div>
 
@@ -750,7 +783,7 @@
 <!--<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">-->
 <div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 540px;">
     <div style='padding: 15px;'>Mode:</div>
-    <div id="component-demo-container1" style="margin-top: 0px; margin-left: 80px;">
+    <div id="component-demo-container1" style="margin-top: 0px; margin-left: 132px;">
         <div class="extOnOffSwitch">
             <input type="checkbox" name="extOnOffSwitch"
                    class="extOnOffSwitch-checkbox" id="extOnOffSwitch1"
@@ -808,7 +841,7 @@
         <div class="outSwitch">
             <svg class="outSwitch-svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
                 <path stroke="#34495e"
-                      d="M 14.0 1.0 C 8.0 1.0 4.0 5.0 4.0 10.0 C 4.0 14.0 6.0 17.0 9.0 18.0 C 9.0 18.0 9.0 19.0 9.0 19.0 C 9.0 19.0 9.0 25.0 9.0 25.0 C 9.0 25.0 10.0 26.0 11.0 26.0 C 12.0 27.0 12.0 27.0 14.0 27.0 C 15.0 27.0 15.0 27.0 16.0 26.0 C 17.0 26.0 18.0 25.0 18.0 25.0 C 18.0 25.0 18.0 19.0 18.0 19.0 C 18.0 19.0 18.0 18.0 18.0 18.0 C 21.0 17.0 23.0 14.0 23.0 10.0 C 23.0 5.0 19.0 1.0 14.0 1.0 C 14.0 1.0 14.0 1.0 14.0 1.0 ZM 14.0 3.0 C 18.0 3.0 21.0 6.0 21.0 10.0 C 21.0 13.0 19.0 16.0 17.0 17.0 C 17.0 17.0 16.0 19.0 16.0 19.0 C 16.0 20.0 15.0 20.0 14.0 20.0 C 12.0 20.0 11.0 20.0 11.0 19.0 C 11.0 19.0 10.0 17.0 10.0 17.0 C 8.0 16.0 6.0 13.0 6.0 10.0 C 6.0 6.0 9.0 3.0 14.0 3.0 C 14.0 3.0 14.0 3.0 14.0 3.0 Z"/>
+                      d="M 5 14.5 C 5 12.567 6.1193 11 7.5 11 C 8.8807 11 10 12.567 10 14.5 C 10 16.433 8.8807 18 7.5 18 C 6.1193 18 5 16.433 5 14.5 ZM 14 10 L 23.68 10 C 24.409 10 25 10.9299 25 12.0769 L 25 16.9231 C 25 18.0701 24.409 19 23.68 19 L 14 19 L 14 10 ZM 1 11 L 1 18 C 1 19.6569 2.3431 21 4 21 L 24 21 C 25.6569 21 27 19.6569 27 18 L 27 11 C 27 9.3431 25.6569 8 24 8 L 4 8 C 2.3431 8 1 9.3431 1 11 ZM 6 14.5 C 6 15.8807 6.6716 17 7.5 17 C 8.3284 17 9 15.8807 9 14.5 C 9 13.1193 8.3284 12 7.5 12 C 6.6716 12 6 13.1193 6 14.5 ZM 20 13 L 20 18 L 21 18 L 21 11 L 20.0844 11 C 20.0065 11.3594 19.8312 11.6094 19.5195 11.7656 C 19.2078 11.9219 18.5844 12.0313 18 12.0313 L 18 13 L 20 13 Z"/>
             </svg>
             <div class="intOnOffSwitch" style="margin-top: -63px; margin-left: 40px;">
                 <input type="checkbox" name="intOnOffSwitch"
@@ -855,7 +888,7 @@
     </div>
 </div>
 
-<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 488px;">
+<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 480px;">
     <div style='padding: 10px;'>
         <canvas id="chart" width="320" height="410"></canvas>
     </div>
@@ -863,10 +896,10 @@
 </div>
 
 <!--<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 488px;">-->
-    <!--<div style='padding: 10px;'>-->
-        <!--<canvas id="Luminosity" width="260" height="140"></canvas>-->
-    <!--</div>-->
-    <!--<div style='text-align: center;'>Luminosity</div>-->
+<!--<div style='padding: 10px;'>-->
+<!--<canvas id="Luminosity" width="260" height="140"></canvas>-->
+<!--</div>-->
+<!--<div style='text-align: center;'>Luminosity</div>-->
 <!--</div>-->
 
 <div style="clear: both"></div>
