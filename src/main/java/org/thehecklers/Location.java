@@ -48,10 +48,42 @@ public class Location {
 
         HttpServletRequest currentRequest =
                 ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        // lazy about determining protocol but can be done too
-        baseEnvLinkURL = "ws://" + currentRequest.getLocalName() + ":" + currentRequest.getLocalPort();
 
-        return baseEnvLinkURL + "*" + cameraHost + ":" + cameraPort
-                + "*" + sensorId;
+        if ("localhost".equals(currentRequest.getLocalName())) {
+            // Standard WebSocket connection
+            baseEnvLinkURL = "ws://" + currentRequest.getLocalName() + ":" + currentRequest.getLocalPort();
+        } else {
+            // For CF; port superfluous due to default 443 for wss
+            baseEnvLinkURL = "wss://" + currentRequest.getServerName();
+        }
+
+        return baseEnvLinkURL + "*" + cameraHost + ":" + cameraPort + "*" + sensorId;
     }
+
+//    @RequestMapping("/remoteTest")
+//    public String getRemoteParamsTest() {
+//        String baseEnvLinkURL;
+//
+//        HttpServletRequest currentRequest =
+//                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+//
+//        return "Remote user: " + currentRequest.getRemoteUser() +
+//                "\nServlet path: " + currentRequest.getServletPath() +
+//                "\nServlet ctxt: " + currentRequest.getServletContext() +
+//                "\nLocal name: " + currentRequest.getLocalName() +
+//                "\nLocal port: " + currentRequest.getLocalPort() +
+//                "\nAuth type: " + currentRequest.getAuthType() +
+//                "\nContext path: " + currentRequest.getContextPath() +
+//                "\nPath info: " + currentRequest.getPathInfo() +
+//                "\nPath xlatd: " + currentRequest.getPathTranslated() +
+//                "\nReq URI: " + currentRequest.getRequestURI() +
+//                "\nLocal addr: " + currentRequest.getLocalAddr() +
+//                "\nRemote addr: " + currentRequest.getRemoteAddr() +
+//                "\nRemote host: " + currentRequest.getRemoteHost() +
+//                "\nRemote port: " + currentRequest.getRemotePort() +
+//                "\nRemote user: " + currentRequest.getRemoteUser() +
+//                "\nServer name: " + currentRequest.getServerName() +
+//                "\nServer port: " + currentRequest.getServerPort() +
+//                "\nServlet ctxt: " + currentRequest.getServletContext();
+//    }
 }

@@ -211,15 +211,15 @@
 
             webSocket = new WebSocket(IPData);
 
-            webSocket.onerror = function (event) {
+            webSocket.onerror = function(event) {
                 onError(event);
             };
 
-            webSocket.onopen = function (event) {
+            webSocket.onopen = function(event) {
                 onOpen(event);
             };
 
-            webSocket.onmessage = function (event) {
+            webSocket.onmessage = function(event) {
                 onMessage(event);
             };
 
@@ -471,6 +471,283 @@
             }
         }
     </script>
+    <!--<style>-->
+        <!--body {-->
+            <!--font-family: Verdana;-->
+            <!--font-size: 1.2em;-->
+            <!--line-height: 1.2em;-->
+            <!--letter-spacing: 0;-->
+            <!--text-align: left;-->
+            <!--word-spacing: normal;-->
+            <!--text-decoration: none;-->
+            <!--color: #444;-->
+            <!--background-color: #a3c2e1;-->
+
+            <!--background-image: url('images/javaone%20banner.png');-->
+            <!--background-repeat: no-repeat;-->
+            <!--background-attachment: fixed;-->
+            <!--background-position: center bottom;-->
+        <!--}-->
+
+        <!--.boxTitle {-->
+            <!--border: 6px solid #FFFFFF;-->
+            <!--border-radius: 20px;-->
+            <!--background-color: #FFFFFF;-->
+            <!--font-size: 1.4em;-->
+            <!--font-weight: bold;-->
+            <!--color: #A3C2E1;-->
+        <!--}-->
+
+        <!--.box {-->
+            <!--border: 4px solid #FFFFFF;-->
+            <!--border-radius: 15px;-->
+        <!--}-->
+    <!--</style>-->
+
+    <!--<style id="intOnOffSwitch-style">-->
+        <!--/* http://proto.io/freebies/onoff/ */-->
+
+        <!--.intOnOffSwitch {-->
+            <!--position: relative;-->
+            <!--width: 83px;-->
+            <!-&#45;&#45;webkit-user-select: none;-->
+            <!-&#45;&#45;moz-user-select: none;-->
+            <!-&#45;&#45;ms-user-select: none;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-checkbox {-->
+            <!--display: none;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-label {-->
+            <!--display: block;-->
+            <!--overflow: hidden;-->
+            <!--cursor: pointer;-->
+            <!--border: 2px solid #FFFFFF;-->
+            <!--border-radius: 32px;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-inner {-->
+            <!--width: 200%;-->
+            <!--margin-left: -100%;-->
+            <!-&#45;&#45;moz-transition: margin 0.3s ease-in 0s;-->
+            <!-&#45;&#45;webkit-transition: margin 0.3s ease-in 0s;-->
+            <!-&#45;&#45;o-transition: margin 0.3s ease-in 0s;-->
+            <!--transition: margin 0.3s ease-in 0s;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-inner:before, .intOnOffSwitch-inner:after {-->
+            <!--float: left;-->
+            <!--width: 50%;-->
+            <!--height: 46px;-->
+            <!--padding: 0;-->
+            <!--line-height: 46px;-->
+            <!--font-size: 32px;-->
+            <!--color: white;-->
+            <!--font-family: Trebuchet, Arial, sans-serif;-->
+            <!--font-weight: bold;-->
+            <!-&#45;&#45;moz-box-sizing: border-box;-->
+            <!-&#45;&#45;webkit-box-sizing: border-box;-->
+            <!--box-sizing: border-box;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-inner:before {-->
+            <!--content: "1";-->
+            <!--padding-left: 9px;-->
+            <!--background-color: #A3C2E1;-->
+            <!--color: #FFFFFF;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-inner:after {-->
+            <!--content: "0";-->
+            <!--padding-right: 9px;-->
+            <!--background-color: #A3C2E1;-->
+            <!--color: #FFFFFF;-->
+            <!--text-align: right;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-switch {-->
+            <!--width: 36px;-->
+            <!--margin: 5px;-->
+            <!--background: #FFFFFF;-->
+            <!--border: 2px solid #FFFFFF;-->
+            <!--border-radius: 32px;-->
+            <!--position: absolute;-->
+            <!--top: 0;-->
+            <!--bottom: 0;-->
+            <!--right: 32px;-->
+            <!-&#45;&#45;moz-transition: all 0.3s ease-in 0s;-->
+            <!-&#45;&#45;webkit-transition: all 0.3s ease-in 0s;-->
+            <!-&#45;&#45;o-transition: all 0.3s ease-in 0s;-->
+            <!--transition: all 0.3s ease-in 0s;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-checkbox:checked + .intOnOffSwitch-label .intOnOffSwitch-inner {-->
+            <!--margin-left: 0;-->
+        <!--}-->
+
+        <!--.intOnOffSwitch-checkbox:checked + .intOnOffSwitch-label .intOnOffSwitch-switch {-->
+            <!--right: 0px;-->
+        <!--}-->
+
+    <!--</style>-->
+
+    <!--<style id="outSwitch-style">-->
+        <!--.outSwitch {-->
+            <!--position: relative;-->
+            <!--width: 122px;-->
+            <!--height: 48px;-->
+            <!-&#45;&#45;webkit-user-select: none;-->
+            <!-&#45;&#45;moz-user-select: none;-->
+            <!-&#45;&#45;ms-user-select: none;-->
+            <!--border: 2px solid #FFFFFF;-->
+            <!--border-radius: 32px;-->
+            <!--background-color: #FFFFFF;-->
+        <!--}-->
+
+        <!--.outSwitch-svg {-->
+            <!--position: relative;-->
+            <!--width: 26px;-->
+            <!--height: 48px;-->
+            <!-&#45;&#45;webkit-user-select: none;-->
+            <!-&#45;&#45;moz-user-select: none;-->
+            <!-&#45;&#45;ms-user-select: none;-->
+            <!--padding-left: 8px;-->
+            <!--padding-top: 10px;-->
+        <!--}-->
+    <!--</style>-->
+
+    <!--<style id="extOnOffSwitch-style">-->
+        <!--.extOnOffSwitch {-->
+            <!--position: relative;-->
+            <!--width: 100px;-->
+            <!-&#45;&#45;webkit-user-select: none;-->
+            <!-&#45;&#45;moz-user-select: none;-->
+            <!-&#45;&#45;ms-user-select: none;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-checkbox {-->
+            <!--display: none;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-label {-->
+            <!--display: block;-->
+            <!--overflow: hidden;-->
+            <!--cursor: pointer;-->
+            <!--border: 2px solid #FFFFFF;-->
+            <!--border-radius: 9px;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-inner {-->
+            <!--width: 200%;-->
+            <!--margin-left: -100%;-->
+            <!-&#45;&#45;moz-transition: margin 0.3s ease-in 0s;-->
+            <!-&#45;&#45;webkit-transition: margin 0.3s ease-in 0s;-->
+            <!-&#45;&#45;o-transition: margin 0.3s ease-in 0s;-->
+            <!--transition: margin 0.3s ease-in 0s;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-inner:before, .extOnOffSwitch-inner:after {-->
+            <!--float: left;-->
+            <!--width: 50%;-->
+            <!--height: 46px;-->
+            <!--padding: 0;-->
+            <!--line-height: 46px;-->
+            <!--font-size: 32px;-->
+            <!--color: white;-->
+            <!--font-family: Trebuchet, Arial, sans-serif;-->
+            <!--font-weight: bold;-->
+            <!-&#45;&#45;moz-box-sizing: border-box;-->
+            <!-&#45;&#45;webkit-box-sizing: border-box;-->
+            <!--box-sizing: border-box;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-inner:before {-->
+            <!--content: "A";-->
+            <!--padding-left: 14px;-->
+            <!--background-color: #A3C2E1;-->
+            <!--color: #FFFFFF;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-inner:after {-->
+            <!--content: "M";-->
+            <!--padding-right: 14px;-->
+            <!--background-color: #A3C2E1;-->
+            <!--color: #FFFFFF;-->
+            <!--text-align: right;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-switch {-->
+            <!--width: 36px;-->
+            <!--margin: 5px;-->
+            <!--background: #FFFFFF;-->
+            <!--border: 2px solid #FFFFFF;-->
+            <!--border-radius: 9px;-->
+            <!--position: absolute;-->
+            <!--top: 0;-->
+            <!--bottom: 0;-->
+            <!--right: 50px;-->
+            <!-&#45;&#45;moz-transition: all 0.3s ease-in 0s;-->
+            <!-&#45;&#45;webkit-transition: all 0.3s ease-in 0s;-->
+            <!-&#45;&#45;o-transition: all 0.3s ease-in 0s;-->
+            <!--transition: all 0.3s ease-in 0s;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-checkbox:checked + .extOnOffSwitch-label .extOnOffSwitch-inner {-->
+            <!--margin-left: 0;-->
+        <!--}-->
+
+        <!--.extOnOffSwitch-checkbox:checked + .extOnOffSwitch-label .extOnOffSwitch-switch {-->
+            <!--right: 0px;-->
+        <!--}-->
+    <!--</style>-->
+
+    <!--<style id="camara-style">-->
+        <!--.image-video {-->
+            <!--width: 640px;-->
+            <!--height: 480px;-->
+        <!--}-->
+
+        <!--.corner-frame {-->
+            <!--width: 640px;-->
+            <!--height: 480px;-->
+            <!--position: relative;-->
+            <!--border: 4px solid #FFFFFF;-->
+            <!--border-radius: 15px;-->
+        <!--}-->
+
+        <!--.corner-top-left, .corner-top-right, .corner-bot-left, .corner-bot-right {-->
+            <!--width: 10px;-->
+            <!--height: 10px;-->
+            <!--position: absolute;-->
+            <!--background: url(images/5l520j.png) no-repeat;-->
+            <!--z-index: 1;-->
+        <!--}-->
+
+        <!--.corner-top-left {-->
+            <!--top: 0;-->
+            <!--left: 0;-->
+            <!--background-position: 0 0;-->
+        <!--}-->
+
+        <!--.corner-top-right {-->
+            <!--top: 0;-->
+            <!--right: 0;-->
+            <!--background-position: -10px 0;-->
+        <!--}-->
+
+        <!--.corner-bot-left {-->
+            <!--bottom: 0px;-->
+            <!--left: 0;-->
+            <!--background-position: 0 -10px;-->
+        <!--}-->
+
+        <!--.corner-bot-right {-->
+            <!--bottom: 0px;-->
+            <!--right: 0;-->
+            <!--background-position: -10px -10px;-->
+        <!--}-->
+    <!--</style>-->
 </head>
 <body onload='getIP()' bgcolor="#cccccc">
 <div class="boxTitle" style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">

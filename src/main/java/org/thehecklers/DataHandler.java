@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Component
 public class DataHandler extends TextWebSocketHandler {
-    List<WebSocketSession> sessionList = new ArrayList<>();
+    private List<WebSocketSession> sessionList = new ArrayList<>();
 
     @Autowired
     protected ReadingRepository repo;

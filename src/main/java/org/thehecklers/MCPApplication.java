@@ -9,8 +9,8 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 @SpringBootApplication
 public class MCPApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
-    @Autowired
-    private ReadingRepository repo;
+//    @Autowired
+//    private ReadingRepository repo;
 
     public static void main(String[] args) {
         SpringApplication.run(MCPApplication.class, args);

@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Component
 public class ControlHandler extends TextWebSocketHandler {
-    List<WebSocketSession> sessionList = new ArrayList<>();
+    private List<WebSocketSession> sessionList = new ArrayList<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -35,7 +35,7 @@ public class ControlHandler extends TextWebSocketHandler {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getLocalizedMessage());
+            System.out.println("Exception handling control message: " + e.getLocalizedMessage());
         }
     }
 
