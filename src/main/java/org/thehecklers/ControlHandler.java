@@ -2,10 +2,12 @@ package org.thehecklers;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.PingMessage;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,16 @@ public class ControlHandler extends TextWebSocketHandler {
             }
         } catch (Exception e) {
             System.out.println("Exception handling control message: " + e.getLocalizedMessage());
+        }
+    }
+
+    public void sendPing() {
+        for (WebSocketSession sessionInList : sessionList) {
+            try {
+                sessionInList.sendMessage(new PingMessage());
+            } catch (IOException e) {
+                System.out.println("Exception sending Control WebSocket ping to session " + sessionInList.getId() + ": " + e.getLocalizedMessage());
+            }
         }
     }
 

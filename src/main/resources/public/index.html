@@ -4,7 +4,7 @@
     <title>Master Control Program (MCP)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="../css/mcp.css">
+    <link rel="stylesheet" type="text/css" href="css/mcp.css">
     <script type='text/javascript' src='js/Gauge/js/tween-min.js'></script>
     <script type='text/javascript' src='js/Gauge/js/simplegauge.js'></script>
     <script type="text/javascript" src="js/smoothie.js"></script>
@@ -44,9 +44,9 @@
                 maxValue: 40, minValue: -10,
                 sections: [{"start": "-10", "stop": "0", "color": "#2976fa"},
                     {"start": "0", "stop": "10", "color": "#29c0fa"},
-                    {"start": "10", "stop": "20", "color": "#29fa3d"},
-                    {"start": "20", "stop": "30", "color": "#ffd82a"},
-                    {"start": "30", "stop": "40", "color": "#ff312a"}]
+                    {"start": "10", "stop": "20", "color": "#21c831"},
+                    {"start": "20", "stop": "30", "color": "#ffdf54"},
+                    {"start": "30", "stop": "40", "color": "#cc2722"}]
             });
             controlT.setValue(0);
 
@@ -58,9 +58,9 @@
                 title: "Humidity", unit: "%",
                 sections: [{"start": "0", "stop": "20", "color": "#2976fa"},
                     {"start": "20", "stop": "40", "color": "#29c0fa"},
-                    {"start": "40", "stop": "60", "color": "#29fa3d"},
-                    {"start": "60", "stop": "80", "color": "#ffd82a"},
-                    {"start": "80", "stop": "100", "color": "#ff312a"}]
+                    {"start": "40", "stop": "60", "color": "#21c831"},
+                    {"start": "60", "stop": "80", "color": "#ffdf54"},
+                    {"start": "80", "stop": "100", "color": "#cc2722"}]
             });
             controlH.setValue(0);
 
@@ -70,14 +70,17 @@
                 scalable: false, animated: true,
                 duration: 3, decimals: 3,
                 title: "Voltage", unit: "V",
-                maxValue: 20,
-                sections: [{"start": "0", "stop": "4", "color": "#2976fa"},
-                    {"start": "4", "stop": "8", "color": "#29c0fa"},
-                    {"start": "8", "stop": "12", "color": "#29fa3d"},
-                    {"start": "12", "stop": "16", "color": "#ffd82a"},
-                    {"start": "16", "stop": "20", "color": "#ff312a"}]
+                minValue: 11,
+                maxValue: 15,
+                sections: [{"start": "11", "stop": "11.51", "color": "#cc2722"},
+                    {"start": "11.51", "stop": "11.81", "color": "#ffdf54"},
+                    {"start": "11.81", "stop": "15", "color": "#21c831"}]
             });
             controlV.setValue(0);
+
+//            sections: [{"start": "11", "stop": "11.51", "color": "#ff312a"},
+//                {"start": "11.51", "stop": "11.81", "color": "#ffd82a"},
+//                {"start": "11.81", "stop": "15", "color": "#29fa3d"}]
 
             controlL = new Gauge({
                 id: 'controlL', parentId: 'containerL',
@@ -85,12 +88,12 @@
                 scalable: false, animated: true,
                 duration: 3, decimals: 2,
                 title: "Luminosity", unit: "w",
-                maxValue: 5,
-                sections: [{"start": "0", "stop": "1", "color": "#2969fa"},
-                    {"start": "1", "stop": "2", "color": "#4f84fb"},
-                    {"start": "2", "stop": "3", "color": "#769ffc"},
-                    {"start": "3", "stop": "4", "color": "#9cbafd"},
-                    {"start": "4", "stop": "5", "color": "#c2d4fe"}]
+                maxValue: 1,
+                sections: [{"start": "0", "stop": "0.2", "color": "#2969fa"},
+                    {"start": "0.2", "stop": "0.4", "color": "#4f84fb"},
+                    {"start": "0.4", "stop": "0.6", "color": "#769ffc"},
+                    {"start": "0.6", "stop": "0.8", "color": "#9cbafd"},
+                    {"start": "0.8", "stop": "1", "color": "#c2d4fe"}]
             });
             controlL.setValue(0);
 
@@ -119,9 +122,9 @@
                 maxValue: 100,
                 sections: [{"start": "0", "stop": "20", "color": "#2976fa"},
                     {"start": "20", "stop": "40", "color": "#29c0fa"},
-                    {"start": "40", "stop": "60", "color": "#29fa3d"},
-                    {"start": "60", "stop": "80", "color": "#ffd82a"},
-                    {"start": "80", "stop": "100", "color": "#ff312a"}]
+                    {"start": "40", "stop": "60", "color": "#21c831"},
+                    {"start": "60", "stop": "80", "color": "#ffdf54"},
+                    {"start": "80", "stop": "100", "color": "#cc2722"}]
             });
             controlS.setValue(0);
 
@@ -134,9 +137,9 @@
                 maxValue: 10,
                 sections: [{"start": "0", "stop": "2", "color": "#2976fa"},
                     {"start": "2", "stop": "4", "color": "#29c0fa"},
-                    {"start": "4", "stop": "6", "color": "#29fa3d"},
-                    {"start": "6", "stop": "8", "color": "#ffd82a"},
-                    {"start": "8", "stop": "10", "color": "#ff312a"}]
+                    {"start": "4", "stop": "6", "color": "#21c831"},
+                    {"start": "6", "stop": "8", "color": "#ffdf54"},
+                    {"start": "8", "stop": "10", "color": "#cc2722"}]
             });
             controlR.setValue(0);
 
@@ -146,12 +149,13 @@
                 scalable: false, animated: true,
                 duration: 3, decimals: 0,
                 title: "Pressure", unit: "Pa",
-                maxValue: 125000,
-                sections: [{"start": "0", "stop": "25000", "color": "#2976fa"},
-                    {"start": "25000", "stop": "50000", "color": "#29c0fa"},
-                    {"start": "50000", "stop": "75000", "color": "#29fa3d"},
-                    {"start": "75000", "stop": "100000", "color": "#ffd82a"},
-                    {"start": "100000", "stop": "125000", "color": "#ff312a"}]
+                minValue: 85000,
+                maxValue: 110000,
+                sections: [{"start": "85000", "stop": "90000", "color": "#2969fa"},
+                    {"start": "90000", "stop": "95000", "color": "#4f84fb"},
+                    {"start": "95000", "stop": "100000", "color": "#769ffc"},
+                    {"start": "100000", "stop": "105000", "color": "#9cbafd"},
+                    {"start": "105000", "stop": "110000", "color": "#c2d4fe"}]
             });
             controlP.setValue(0);
 

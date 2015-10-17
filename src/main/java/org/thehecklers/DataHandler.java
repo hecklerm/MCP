@@ -18,7 +18,10 @@ public class DataHandler extends TextWebSocketHandler {
     private List<WebSocketSession> sessionList = new ArrayList<>();
 
     @Autowired
-    protected ReadingRepository repo;
+    private ReadingRepository repo;
+
+    @Autowired
+    private ControlHandler controlHandler;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -34,6 +37,9 @@ public class DataHandler extends TextWebSocketHandler {
 
             repo.save(reading);
             System.out.println("New reading: " + reading.toString());
+
+            // Send ping to Control ws client endpoints to keepalive each time we get a Data ws message
+            controlHandler.sendPing();
 
             for (WebSocketSession sessionInList : sessionList) {
                 if (sessionInList != session) {
