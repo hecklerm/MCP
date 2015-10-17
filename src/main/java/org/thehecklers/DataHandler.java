@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,11 +42,19 @@ public class DataHandler extends TextWebSocketHandler {
             // Send ping to Control ws client endpoints to keepalive each time we get a Data ws message
             controlHandler.sendPing();
 
-            for (WebSocketSession sessionInList : sessionList) {
-                if (sessionInList != session) {
-                    sessionInList.sendMessage(message);
+//            for (WebSocketSession sessionInList : sessionList) {
+//                if (sessionInList != session) {
+//                    sessionInList.sendMessage(message);
+//                }
+//            }
+
+            sessionList.stream().filter(s -> s != session).forEach(s -> {
+                try {
+                    s.sendMessage(message);
+                } catch (IOException e) {
+                    System.out.println("Exception re-sending data message: " + e.getLocalizedMessage());
                 }
-            }
+            });
         } catch (Exception e) {
             System.out.println("Exception: " + e.getLocalizedMessage());
         }
