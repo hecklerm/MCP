@@ -7,16 +7,17 @@ import org.springframework.stereotype.Controller;
 
 /**
  * Created by markheckler on 9/25/15.
+ * Marked as unnecessary for demo. :)
  */
-@Controller
+//@Controller
 public class ReadingController {
-    @Autowired
-    private ReadingRepository repo;
-
-    @MessageMapping("/data")
-    @SendTo("/topic/readings")
-    public Reading processReading(Reading reading) {
-        repo.save(reading);
-        return reading;
-    }
+//    @Autowired
+//    private ReadingRepository repo;
+//
+//    @MessageMapping("/data")
+//    @SendTo("/topic/readings")
+//    public Reading processReading(Reading reading) {
+//        repo.save(reading);
+//        return reading;
+//    }
 }
