@@ -53,37 +53,38 @@ public class Location {
             // Standard WebSocket connection
             baseEnvLinkURL = "ws://" + currentRequest.getLocalName() + ":" + currentRequest.getLocalPort();
         } else {
-            // For CF; port superfluous due to default 443 for wss
-            baseEnvLinkURL = "wss://" + currentRequest.getServerName();
+            // PWS on AWS opens port 4443 only; PEZ runs secure WebSocket on port 443
+            baseEnvLinkURL = "wss://" + currentRequest.getServerName() + ":" +
+                    (currentRequest.getLocalPort() == 8080 ? "4443" : "443");
         }
 
         return baseEnvLinkURL + "*" + cameraHost + ":" + cameraPort + "*" + sensorId;
     }
 
-//    @RequestMapping("/remoteTest")
-//    public String getRemoteParamsTest() {
-//        String baseEnvLinkURL;
-//
-//        HttpServletRequest currentRequest =
-//                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-//
-//        return "Remote user: " + currentRequest.getRemoteUser() +
-//                "\nServlet path: " + currentRequest.getServletPath() +
-//                "\nServlet ctxt: " + currentRequest.getServletContext() +
-//                "\nLocal name: " + currentRequest.getLocalName() +
-//                "\nLocal port: " + currentRequest.getLocalPort() +
-//                "\nAuth type: " + currentRequest.getAuthType() +
-//                "\nContext path: " + currentRequest.getContextPath() +
-//                "\nPath info: " + currentRequest.getPathInfo() +
-//                "\nPath xlatd: " + currentRequest.getPathTranslated() +
-//                "\nReq URI: " + currentRequest.getRequestURI() +
-//                "\nLocal addr: " + currentRequest.getLocalAddr() +
-//                "\nRemote addr: " + currentRequest.getRemoteAddr() +
-//                "\nRemote host: " + currentRequest.getRemoteHost() +
-//                "\nRemote port: " + currentRequest.getRemotePort() +
-//                "\nRemote user: " + currentRequest.getRemoteUser() +
-//                "\nServer name: " + currentRequest.getServerName() +
-//                "\nServer port: " + currentRequest.getServerPort() +
-//                "\nServlet ctxt: " + currentRequest.getServletContext();
-//    }
+    @RequestMapping("/remoteTest")
+    public String getRemoteParamsTest() {
+        String baseEnvLinkURL;
+
+        HttpServletRequest currentRequest =
+                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
+        return "Remote user: " + currentRequest.getRemoteUser() +
+                "\nServlet path: " + currentRequest.getServletPath() +
+                "\nServlet ctxt: " + currentRequest.getServletContext() +
+                "\nLocal name: " + currentRequest.getLocalName() +
+                "\nLocal port: " + currentRequest.getLocalPort() +
+                "\nAuth type: " + currentRequest.getAuthType() +
+                "\nContext path: " + currentRequest.getContextPath() +
+                "\nPath info: " + currentRequest.getPathInfo() +
+                "\nPath xlatd: " + currentRequest.getPathTranslated() +
+                "\nReq URI: " + currentRequest.getRequestURI() +
+                "\nLocal addr: " + currentRequest.getLocalAddr() +
+                "\nRemote addr: " + currentRequest.getRemoteAddr() +
+                "\nRemote host: " + currentRequest.getRemoteHost() +
+                "\nRemote port: " + currentRequest.getRemotePort() +
+                "\nRemote user: " + currentRequest.getRemoteUser() +
+                "\nServer name: " + currentRequest.getServerName() +
+                "\nServer port: " + currentRequest.getServerPort() +
+                "\nServlet ctxt: " + currentRequest.getServletContext();
+    }
 }
