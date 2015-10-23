@@ -69,22 +69,22 @@ public class Location {
                 ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
         return "Remote user: " + currentRequest.getRemoteUser() +
-                "\nServlet path: " + currentRequest.getServletPath() +
-                "\nServlet ctxt: " + currentRequest.getServletContext() +
-                "\nLocal name: " + currentRequest.getLocalName() +
-                "\nLocal port: " + currentRequest.getLocalPort() +
-                "\nAuth type: " + currentRequest.getAuthType() +
-                "\nContext path: " + currentRequest.getContextPath() +
-                "\nPath info: " + currentRequest.getPathInfo() +
-                "\nPath xlatd: " + currentRequest.getPathTranslated() +
-                "\nReq URI: " + currentRequest.getRequestURI() +
-                "\nLocal addr: " + currentRequest.getLocalAddr() +
-                "\nRemote addr: " + currentRequest.getRemoteAddr() +
-                "\nRemote host: " + currentRequest.getRemoteHost() +
-                "\nRemote port: " + currentRequest.getRemotePort() +
-                "\nRemote user: " + currentRequest.getRemoteUser() +
-                "\nServer name: " + currentRequest.getServerName() +
-                "\nServer port: " + currentRequest.getServerPort() +
-                "\nServlet ctxt: " + currentRequest.getServletContext();
+                "<br>Servlet path: " + currentRequest.getServletPath() +
+                "<br>Servlet ctxt: " + currentRequest.getServletContext() +
+                "<br>Local name: " + currentRequest.getLocalName() +
+                "<br>Local port: " + currentRequest.getLocalPort() +
+                "<br>Auth type: " + currentRequest.getAuthType() +
+                "<br>Context path: " + currentRequest.getContextPath() +
+                "<br>Path info: " + currentRequest.getPathInfo() +
+                "<br>Path xlatd: " + currentRequest.getPathTranslated() +
+                "<br>Req URI: " + currentRequest.getRequestURI() +
+                "<br>Local addr: " + currentRequest.getLocalAddr() +
+                "<br>Remote addr: " + currentRequest.getRemoteAddr() +
+                "<br>Remote host: " + currentRequest.getRemoteHost() +
+                "<br>Remote port: " + currentRequest.getRemotePort() +
+                "<br>Remote user: " + currentRequest.getRemoteUser() +
+                "<br>Server name: " + currentRequest.getServerName() +
+                "<br>Server port: " + currentRequest.getServerPort() +
+                "<br>Servlet ctxt: " + currentRequest.getServletContext();
     }
 }
