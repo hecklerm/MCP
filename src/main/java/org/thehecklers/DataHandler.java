@@ -27,7 +27,7 @@ public class DataHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessionList.add(session);
-        System.out.println("Connection established from " + session.toString() + ", TIME: " + new Date().toString());
+        System.out.println("Data connection established from " + session.toString() + ", TIME: " + new Date().toString());
     }
 
     @Override
@@ -57,6 +57,6 @@ public class DataHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessionList.remove(session);
-        System.out.println("Connection closed by " + session.toString() + ", TIME: " + new Date().toString());
+        System.out.println("Data connection closed by " + session.toString() + ", TIME: " + new Date().toString());
     }
 }
