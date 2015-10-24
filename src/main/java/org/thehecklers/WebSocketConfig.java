@@ -11,9 +11,9 @@ import org.springframework.web.socket.config.annotation.*;
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
-    protected DataHandler dataHandler;
+    private DataHandler dataHandler;
     @Autowired
-    protected ControlHandler controlHandler;
+    private ControlHandler controlHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
