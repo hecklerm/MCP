@@ -1,5 +1,6 @@
 package org.thehecklers;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.PingMessage;
@@ -41,6 +42,7 @@ public class ControlHandler extends TextWebSocketHandler {
         }
     }
 
+    @Scheduled(fixedRate = 60000)
     public void sendPing() {
         for (WebSocketSession sessionInList : sessionList) {
             try {
