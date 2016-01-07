@@ -17,8 +17,8 @@ public class MCPApplication extends SpringBootServletInitializer implements Comm
     private String topicName;
 //    @Autowired
 //    private ReadingRepository repo;
-@Autowired
-private MQTTSubscriber mqttSubscriber;
+    @Autowired
+    private MQTTSubscriber mqttSubscriber;
 
     public String getTopicName() {
         return topicName;
