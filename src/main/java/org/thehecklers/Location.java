@@ -54,11 +54,10 @@ public class Location {
             baseEnvLinkURL = "ws://" + currentRequest.getLocalName() + ":" + currentRequest.getLocalPort();
         } else {
             // PWS on AWS opens port 4443 only; PEZ runs secure WebSocket on port 443
-//            baseEnvLinkURL = "wss://" + currentRequest.getServerName() + ":" +
-//                    (!currentRequest.getServerName().contains("pez") ? "4443" : "443");
-            // Temporary meatball workaround for CodeMash. FIX. MAH. Only (now) works on PEZ, now PWS. :(
-            baseEnvLinkURL = "wss://" + currentRequest.getServerName() + ":443";
-            System.out.println("Server name: " + currentRequest.getServerName());
+            baseEnvLinkURL = "wss://" + currentRequest.getServerName() + ":" +
+                    (currentRequest.getServerName().indexOf("pez") > -1 ? "443" : "4443");
+
+            System.out.println("baseEnvLinkURL=|" + baseEnvLinkURL + "|");
         }
 
         return baseEnvLinkURL + "*" + cameraHost + ":" + cameraPort + "*" + sensorId;
