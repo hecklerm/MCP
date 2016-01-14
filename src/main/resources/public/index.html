@@ -9,14 +9,9 @@
     <script type='text/javascript' src='js/Gauge/js/simplegauge.js'></script>
     <script type="text/javascript" src="js/smoothie.js"></script>
     <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
+    <script src="assets/raphael-2.1.4.min.js"></script>
+    <script src="assets/justgage.js"></script>
     <script type='text/javascript'>
-        var controlT;
-        var controlH;
-        var controlV;
-        var controlL;
-        var controlS;
-        var controlR;
-        var controlP;
         var lum;
         var windDir;
         var windSpeed;
@@ -35,68 +30,6 @@
         var status = parseInt(-1);
 
         function init() {
-            controlT = new Gauge({
-                id: 'controlT', parentId: 'containerT',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 1,
-                title: "Temperature", unit: "ºC",
-                maxValue: 40, minValue: -10,
-                sections: [{"start": "-10", "stop": "0", "color": "#2976fa"},
-                    {"start": "0", "stop": "10", "color": "#29c0fa"},
-                    {"start": "10", "stop": "20", "color": "#21c831"},
-                    {"start": "20", "stop": "30", "color": "#ffdf54"},
-                    {"start": "30", "stop": "40", "color": "#cc2722"}]
-            });
-            controlT.setValue(0);
-
-            controlH = new Gauge({
-                id: 'controlH', parentId: 'containerH',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 1,
-                title: "Humidity", unit: "%",
-                sections: [{"start": "0", "stop": "20", "color": "#2976fa"},
-                    {"start": "20", "stop": "40", "color": "#29c0fa"},
-                    {"start": "40", "stop": "60", "color": "#21c831"},
-                    {"start": "60", "stop": "80", "color": "#ffdf54"},
-                    {"start": "80", "stop": "100", "color": "#cc2722"}]
-            });
-            controlH.setValue(0);
-
-            controlV = new Gauge({
-                id: 'controlV', parentId: 'containerV',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 3,
-                title: "Voltage", unit: "V",
-                minValue: 11,
-                maxValue: 15,
-                sections: [{"start": "11", "stop": "11.51", "color": "#cc2722"},
-                    {"start": "11.51", "stop": "11.81", "color": "#ffdf54"},
-                    {"start": "11.81", "stop": "15", "color": "#21c831"}]
-            });
-            controlV.setValue(0);
-
-//            sections: [{"start": "11", "stop": "11.51", "color": "#ff312a"},
-//                {"start": "11.51", "stop": "11.81", "color": "#ffd82a"},
-//                {"start": "11.81", "stop": "15", "color": "#29fa3d"}]
-
-            controlL = new Gauge({
-                id: 'controlL', parentId: 'containerL',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 2,
-                title: "Luminosity", unit: "w",
-                maxValue: 1,
-                sections: [{"start": "0", "stop": "0.2", "color": "#2969fa"},
-                    {"start": "0.2", "stop": "0.4", "color": "#4f84fb"},
-                    {"start": "0.4", "stop": "0.6", "color": "#769ffc"},
-                    {"start": "0.6", "stop": "0.8", "color": "#9cbafd"},
-                    {"start": "0.8", "stop": "1", "color": "#c2d4fe"}]
-            });
-            controlL.setValue(0);
-
             windDir = new SegmentDisplay("windDir");
             windDir.pattern = "###";
             windDir.displayAngle = 6;
@@ -107,66 +40,11 @@
             windDir.segmentDistance = 0.3;
             windDir.segmentCount = 7;
             windDir.cornerType = 3;
-            //windDir.colorOn = "#2421dd";
-            //windDir.colorOff = "#1b0532";
-            windDir.colorOn = "#1b0532";
-            windDir.colorOff = "#C1C1C1";
+            windDir.colorOn = "#E5E5E5";
+            windDir.colorOff = "#2A4747";
             windDir.draw();
 
-            controlS = new Gauge({
-                id: 'controlS', parentId: 'containerS',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 2,
-                title: "Wind Speed", unit: "mph",
-                maxValue: 100,
-                sections: [{"start": "0", "stop": "20", "color": "#2976fa"},
-                    {"start": "20", "stop": "40", "color": "#29c0fa"},
-                    {"start": "40", "stop": "60", "color": "#21c831"},
-                    {"start": "60", "stop": "80", "color": "#ffdf54"},
-                    {"start": "80", "stop": "100", "color": "#cc2722"}]
-            });
-            controlS.setValue(0);
-
-            controlR = new Gauge({
-                id: 'controlR', parentId: 'containerR',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 2,
-                title: "Rainfall", unit: "in",
-                maxValue: 10,
-                sections: [{"start": "0", "stop": "2", "color": "#2976fa"},
-                    {"start": "2", "stop": "4", "color": "#29c0fa"},
-                    {"start": "4", "stop": "6", "color": "#21c831"},
-                    {"start": "6", "stop": "8", "color": "#ffdf54"},
-                    {"start": "8", "stop": "10", "color": "#cc2722"}]
-            });
-            controlR.setValue(0);
-
-            controlP = new Gauge({
-                id: 'controlP', parentId: 'containerP',
-                width: 300, height: 300,
-                scalable: false, animated: true,
-                duration: 3, decimals: 0,
-                title: "Pressure", unit: "Pa",
-                minValue: 85000,
-                maxValue: 110000,
-                sections: [{"start": "85000", "stop": "90000", "color": "#2969fa"},
-                    {"start": "90000", "stop": "95000", "color": "#4f84fb"},
-                    {"start": "95000", "stop": "100000", "color": "#769ffc"},
-                    {"start": "100000", "stop": "105000", "color": "#9cbafd"},
-                    {"start": "105000", "stop": "110000", "color": "#c2d4fe"}]
-            });
-            controlP.setValue(0);
-
-            document.getElementById("sensorT").style.display = "block";
-            document.getElementById("sensorH").style.display = "block";
-            document.getElementById("sensorV").style.display = "block";
-            document.getElementById("sensorL").style.display = "block";
             document.getElementById("sensorD").style.display = "block";
-            document.getElementById("sensorS").style.display = "block";
-            document.getElementById("sensorR").style.display = "block";
-            document.getElementById("sensorP").style.display = "block";
 
             webSocketControl = new WebSocket(IPControl);
 
@@ -235,20 +113,27 @@
         function onMessage(event) {
             var json = JSON.parse(event.data);
             var time = new Date().getTime();
-            controlT.setValue(json.temp);
-            gTemp.append(time, parseFloat(json.temp));
-            controlH.setValue(json.hum);
-            gHum.append(time, parseFloat(json.hum));
-//                controlA.setValue((1000*parseFloat(json.amps)).toString());
-            controlV.setValue(json.volts);
-            gVolt.append(time, parseFloat(json.volts));
-//                gAmps.append(time, 1000*parseFloat(json.amps));
 
-            controlL.setValue(json.lum);
+            tempGauge.refresh(json.temp.toFixed(1));
+            gTemp.append(time, parseFloat(json.temp));
+
+            humidGauge.refresh(json.hum.toFixed(1));
+            gHum.append(time, parseFloat(json.hum));
+
+            voltGauge.refresh(json.volts.toFixed(3));
+
+            lumenGauge.refresh(json.lum.toFixed(2));
+
+            voltGauge.refresh(json.volts);
+            gVolt.append(time, parseFloat(json.volts));
+
+            lumenGauge.refresh(json.lum);
+
             windDir.setValue(pad((json.windDir).toString(), 3));
-            controlS.setValue(json.windSpeed);
-            controlR.setValue(json.rainfall);
-            controlP.setValue(json.pressure);
+
+            wspdGauge.refresh(json.windSpeed.toFixed(2));
+
+            pressGauge.refresh(json.pressure.toFixed(0));
 
             if (json.status !== null) {
                 var st = parseInt(json.status);
@@ -428,18 +313,12 @@
             });
             gVolt = new TimeSeries();
             gVolt.append(new Date().getTime(), 0);
-//            gAmps = new TimeSeries();
-//            gAmps.append(new Date().getTime(), 0);
             chart.addTimeSeries(gVolt, {
                 strokeStyle: 'rgba(0, 0, 255, 1)',
                 fillStyle: 'rgba(0, 0, 255, 0.1)',
                 lineWidth: 3
             });
-//            chart.addTimeSeries(gAmps, {
-//                strokeStyle: 'rgba(255, 255, 0, 1)',
-//                fillStyle: 'rgba(255, 255, 0, 0.2)',
-//                lineWidth: 3
-//            });
+
             chart.streamTo(document.getElementById("chart"), 3000);
         }
 
@@ -480,47 +359,111 @@
 <div class="boxTitle" style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">
     <div style="text-align: center; padding: 10px;">Power Monitoring & Management in the Cloud</div>
 </div>
-<div id="sensorT" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerT' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 12px;'>Temperature</div>
-</div>
-<div id="sensorH" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerH' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 20px;'>Humidity</div>
-</div>
-<div id="sensorV" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerV' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 12px;'>Voltage</div>
-</div>
-<div id="sensorL" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerL' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 20px;'>Luminosity</div>
-</div>
-<div id="sensorD" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
+<div id="tempGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="humidGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="voltGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="lumenGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="wspdGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="sensorD" class="box-invisible" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
     <div id='containerD' style='padding: 10px;'></div>
-    <!--<canvas id="windDir" width="260" height="140"></canvas>-->
+    <div align="center" style="margin-top: 30px; font-size: x-large; font-weight: 700; color: darkgrey;">Wind Direction</div>
     <canvas id="windDir" width="320" height="270"></canvas>
-    <!--<div style='text-align: left;'>Wind Direction</div>-->
-    <div style='margin-left: 20px;'>Wind Direction</div>
-    <!--<div style='margin-top: -30px; margin-left: 20px;'>Wind Direction</div>-->
 </div>
-<div id="sensorS" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerS' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 20px;'>Wind Speed</div>
-</div>
-<div id="sensorR" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerR' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 20px;'>Rainfall</div>
-</div>
-<div id="sensorP" class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerP' style='padding: 10px;'></div>
-    <div style='margin-top: -30px; margin-left: 20px;'>Atmospheric Pressure</div>
-</div>
+<div id="rainGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="pressGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div><script>
+    var tempGauge = new JustGage({
+        id: "tempGauge",
+        value: -15,
+        min: -15,
+        max: 45,
+        decimals: 1,
+        title: "Temperature",
+        label: "deg C",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
 
+    var humidGauge = new JustGage({
+        id: "humidGauge",
+        value: 0,
+        min: 0,
+        max: 100,
+        decimals: 1,
+        title: "Humidity",
+        label: "%",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
 
-<!--<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">-->
-<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 480px;">
-    <div style='padding: 25px;'>Mode:</div>
+    var voltGauge = new JustGage({
+        id: "voltGauge",
+        value: 0,
+        min: 11,
+        max: 16,
+        decimals: 1,
+        title: "Voltage",
+        label: "v DC",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
+
+    var lumenGauge = new JustGage({
+        id: "lumenGauge",
+        value: 0,
+        min: 0,
+        max: 1,
+        decimals: 2,
+        title: "Lumens",
+        label: "w",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
+
+    var wspdGauge = new JustGage({
+        id: "wspdGauge",
+        value: 0,
+        min: 0,
+        max: 100,
+        decimals: 2,
+        title: "Wind Speed",
+        label: "mph",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
+
+    var rainGauge = new JustGage({
+        id: "rainGauge",
+        value: 0,
+        min: 0,
+        max: 10,
+        decimals: 1,
+        title: "Hourly Rainfall",
+        label: "in",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
+
+    var pressGauge = new JustGage({
+        id: "pressGauge",
+        value: 0,
+        min: 90000,
+        max: 110000,
+        title: "Atmospheric Pressure",
+        label: "Pa",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
+</script>
+
+<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 370px;">
+    <div class="switch-label">Mode:</div>
     <div id="component-demo-container1" style="margin-top: -55px; margin-left: 183px;">
         <div class="extOnOffSwitch">
             <input type="checkbox" name="extOnOffSwitch"
@@ -533,7 +476,7 @@
         </div>
     </div>
 
-    <div style='padding: 25px;'>Power:</div>
+    <div class="switch-label" ">Power:</div>
     <div id="component-demo-container2"
          style="margin-top: -55px; margin-left: 172px; filter: alpha(opacity=50); -khtml-opacity: 0.4; -moz-opacity: 0.4; opacity: 0.4;">
         <div class="outSwitch">
@@ -553,7 +496,7 @@
         </div>
     </div>
 
-    <div style='padding: 25px;'>Status Lamp:</div>
+    <div class="switch-label">Status Lamp:</div>
     <div id="component-demo-container3"
          style="margin-top: -55px; margin-left: 172px; filter: alpha(opacity=40); -khtml-opacity: 0.4; -moz-opacity: 0.4; opacity: 0.4;">
         <div class="outSwitch">
@@ -573,7 +516,7 @@
         </div>
     </div>
 
-    <div style='padding: 25px;'>Windows:</div>
+    <div class="switch-label">Windows:</div>
     <div id="component-demo-container4"
          style="margin-top: -55px; margin-left: 172px; filter: alpha(opacity=40); -khtml-opacity: 0.4; -moz-opacity: 0.4; opacity: 0.4;">
         <div class="outSwitch">
@@ -593,7 +536,7 @@
         </div>
     </div>
 
-    <div style='padding: 25px;'>Interior Light:</div>
+    <div class="switch-label">Interior Light:</div>
     <div id="component-demo-container5"
          style="margin-top: -55px; margin-left: 172px; filter: alpha(opacity=40); -khtml-opacity: 0.4; -moz-opacity: 0.4; opacity: 0.4;">
         <div class="outSwitch">
@@ -626,19 +569,12 @@
     </div>
 </div>
 
-<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 480px;">
+<div class="box" style="float: left; margin-top: 15px; margin-left: 22px; width: 340px; height: 480px;">
     <div style='padding: 10px;'>
         <canvas id="chart" width="320" height="410"></canvas>
     </div>
-    <div style='text-align: center;'>MCP Evolution</div>
+    <div style="text-align: center; color: darkgrey">MCP Evolution</div>
 </div>
-
-<!--<div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 488px;">-->
-<!--<div style='padding: 10px;'>-->
-<!--<canvas id="Luminosity" width="260" height="140"></canvas>-->
-<!--</div>-->
-<!--<div style='text-align: center;'>Luminosity</div>-->
-<!--</div>-->
 
 <div style="clear: both"></div>
 <div class="boxTitle"
