@@ -9,7 +9,7 @@ Monitors and controls Renewable Energy System from the Cloud via Spring Boot app
 ### What is this repository for? ###
 
 * It's a source code repo...three guesses. :)
-* 1.0
+* 2.0
 
 ### How do I get set up? ###
 
