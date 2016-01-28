@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="css/mcp.css">
-    <script type='text/javascript' src='js/Gauge/js/tween-min.js'></script>
-    <script type='text/javascript' src='js/Gauge/js/simplegauge.js'></script>
     <script type="text/javascript" src="js/smoothie.js"></script>
     <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
     <script src="assets/raphael-2.1.4.min.js"></script>
@@ -370,7 +368,8 @@
     <canvas id="windDir" width="320" height="270"></canvas>
 </div>
 <div id="rainGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
-<div id="pressGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div><script>
+<div id="pressGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<script>
     var tempGauge = new JustGage({
         id: "tempGauge",
         value: -15,
@@ -378,7 +377,7 @@
         max: 45,
         decimals: 1,
         title: "Temperature",
-        label: "deg C",
+        label: "° C",
         shadowSize: 15,
         shadowVerticalOffset: 15,
         shadowOpacity: 0.8
@@ -414,7 +413,7 @@
         id: "lumenGauge",
         value: 0,
         min: 0,
-        max: 1,
+        max: 4,
         decimals: 2,
         title: "Lumens",
         label: "w",
