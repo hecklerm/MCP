@@ -23,8 +23,7 @@
         var sensorId;
         var gTemp = new TimeSeries();
         var gHum = new TimeSeries();
-        var gVolt;
-        var gAmps;
+        var gVolt = new TimeSeries();
         var status = parseInt(-1);
 
         function init() {
@@ -297,19 +296,20 @@
                 },
                 labels: {fontSize: 16}
             });
-            gTemp.append(new Date().getTime(), 0);
             gHum.append(new Date().getTime(), 0);
             chart.addTimeSeries(gHum, {
                 strokeStyle: 'rgba(255, 0, 0, 1)',
                 fillStyle: 'rgba(255, 0, 0, 0.1)',
                 lineWidth: 3
             });
+
+            gTemp.append(new Date().getTime(), 0);
             chart.addTimeSeries(gTemp, {
                 strokeStyle: 'rgba(0, 255, 0, 1)',
                 fillStyle: 'rgba(0, 255, 0, 0.2)',
                 lineWidth: 3
             });
-            gVolt = new TimeSeries();
+
             gVolt.append(new Date().getTime(), 0);
             chart.addTimeSeries(gVolt, {
                 strokeStyle: 'rgba(0, 0, 255, 1)',
