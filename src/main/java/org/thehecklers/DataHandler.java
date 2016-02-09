@@ -36,9 +36,6 @@ public class DataHandler extends TextWebSocketHandler {
             repo.save(reading);
             System.out.println("New reading: " + reading.toString());
 
-            // Send ping to Control ws client endpoints to keepalive each time we get a Data ws message
-            //controlHandler.sendPing();
-
             sessionList.stream().filter(s -> s != session).forEach(s -> {
                 try {
                     s.sendMessage(message);
