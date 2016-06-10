@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 public class Reading {
 	@Id
@@ -128,6 +129,20 @@ public class Reading {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public void setReading(Reading reading) {
+        this.id = reading.getId();
+        this.node = reading.getNode();
+        this.hum = reading.getHum();
+        this.temp = reading.getTemp();
+        this.volts = reading.getVolts();
+        this.lum = reading.getLum();
+        this.windDir = reading.getWindDir();
+        this.windSpeed = reading.getWindSpeed();
+        this.rainfall = reading.getRainfall();
+        this.pressure = reading.getPressure();
+        this.status = reading.getStatus();
+    }
 
 	@Override
 	public String toString() {

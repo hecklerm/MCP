@@ -21,6 +21,9 @@ public class DataHandler extends TextWebSocketHandler {
     @Autowired
     private ReadingRepository repo;
 
+    @Autowired
+    Reading lastReading;
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessionList.add(session);
@@ -35,6 +38,8 @@ public class DataHandler extends TextWebSocketHandler {
 
             repo.save(reading);
             System.out.println("New reading: " + reading.toString());
+
+            lastReading.setReading(reading);
 
             sessionList.stream().filter(s -> s != session).forEach(s -> {
                 try {

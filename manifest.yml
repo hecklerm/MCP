@@ -1,7 +1,6 @@
 ---
-applications:
-  - name: MCP
-    path: target/MCP-0.0.1-SNAPSHOT.jar
-    memory: 1G
+    applications:
+      - name: MCP
+        path: target/MCP-0.0.1-SNAPSHOT.jar
+        memory: 1G
 
-    
