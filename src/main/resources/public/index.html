@@ -123,10 +123,6 @@
 
             lumenGauge.refresh(json.lum.toFixed(2));
 
-//            voltGauge.refresh(json.volts);                    MAH: Commented out June 10, 2016: Dupe of above, less precise! TEST...
-//            gVolt.append(time, parseFloat(json.volts));       MAH: No rainfall gauge update!  :O
-//
-//            lumenGauge.refresh(json.lum);
             rainGauge.refresh(json.rainfall.toFixed(1));
 
             windDir.setValue(pad((json.windDir).toString(), 3));

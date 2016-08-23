@@ -1,5 +1,6 @@
 package org.thehecklers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,35 +13,40 @@ import javax.servlet.http.HttpServletRequest;
  * Created by markheckler on 9/30/15.
  */
 @RestController
-@ConfigurationProperties(prefix="remote")
+//@ConfigurationProperties(prefix="remote")
 public class Location {
+    @Value("${cameraHost}")
     private String cameraHost;
+
+    @Value("${cameraPort}")
     private String cameraPort;
+
+    @Value("${sensorId}")
     private String sensorId;
 
-    public String getCameraHost() {
-        return cameraHost;
-    }
-
-    public void setCameraHost(String cameraHost) {
-        this.cameraHost = cameraHost;
-    }
-
-    public String getPort() {
-        return cameraPort;
-    }
-
-    public void setCameraPort(String cameraPort) {
-        this.cameraPort = cameraPort;
-    }
-
-    public String getSensorId() {
-        return sensorId;
-    }
-
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
-    }
+//    public String getCameraHost() {
+//        return cameraHost;
+//    }
+//
+//    public void setCameraHost(String cameraHost) {
+//        this.cameraHost = cameraHost;
+//    }
+//
+//    public String getPort() {
+//        return cameraPort;
+//    }
+//
+//    public void setCameraPort(String cameraPort) {
+//        this.cameraPort = cameraPort;
+//    }
+//
+//    public String getSensorId() {
+//        return sensorId;
+//    }
+//
+//    public void setSensorId(String sensorId) {
+//        this.sensorId = sensorId;
+//    }
 
     @RequestMapping("/remote")
     public String getRemoteParams() {
