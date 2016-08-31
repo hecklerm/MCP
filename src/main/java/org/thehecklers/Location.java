@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
  * Created by markheckler on 9/30/15.
  */
 @RestController
-//@ConfigurationProperties(prefix="remote")
 public class Location {
     @Value("${cameraHost}")
     private String cameraHost;
@@ -23,30 +22,6 @@ public class Location {
 
     @Value("${sensorId}")
     private String sensorId;
-
-//    public String getCameraHost() {
-//        return cameraHost;
-//    }
-//
-//    public void setCameraHost(String cameraHost) {
-//        this.cameraHost = cameraHost;
-//    }
-//
-//    public String getPort() {
-//        return cameraPort;
-//    }
-//
-//    public void setCameraPort(String cameraPort) {
-//        this.cameraPort = cameraPort;
-//    }
-//
-//    public String getSensorId() {
-//        return sensorId;
-//    }
-//
-//    public void setSensorId(String sensorId) {
-//        this.sensorId = sensorId;
-//    }
 
     @RequestMapping("/remote")
     public String getRemoteParams() {
