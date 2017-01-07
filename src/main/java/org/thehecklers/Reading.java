@@ -17,28 +17,21 @@ public class Reading {
 	private double hum;
 	private double temp;
 	private double volts;
-	private double lum;
-	private int windDir;
-	private double windSpeed;
-	private double rainfall;
-	private long pressure;
+	private double amps;
+	//private long pressure;
 	private int status;
 	
 	protected Reading() {}
 	
-	public Reading(int id, int node, double hum, double temp, double volts, double lum, int windDir, double windSpeed,
-			double rainfall, long pressure, int status) {
+	public Reading(int id, int node, double hum, double temp, double volts, double amps, int status) {
 		super();
 		this.id = id;
 		this.node = node;
 		this.hum = hum;
 		this.temp = temp;
 		this.volts = volts;
-		this.lum = lum;
-		this.windDir = windDir;
-		this.windSpeed = windSpeed;
-		this.rainfall = rainfall;
-		this.pressure = pressure;
+		this.amps = amps;
+		//this.pressure = pressure;
 		this.status = status;
 	}
 
@@ -82,45 +75,21 @@ public class Reading {
 		this.volts = volts;
 	}
 
-	public double getLum() {
-		return lum;
+	public double getAmps() {
+		return amps;
 	}
 
-	public void setLum(double lum) {
-		this.lum = lum;
+	public void setAmps(double amps) {
+		this.amps = amps;
 	}
 
-	public int getWindDir() {
-		return windDir;
-	}
+//	public long getPressure() {
+//		return pressure;
+//	}
 
-	public void setWindDir(int windDir) {
-		this.windDir = windDir;
-	}
-
-	public double getWindSpeed() {
-		return windSpeed;
-	}
-
-	public void setWindSpeed(double windSpeed) {
-		this.windSpeed = windSpeed;
-	}
-
-	public double getRainfall() {
-		return rainfall;
-	}
-
-	public void setRainfall(double rainfall) {
-		this.rainfall = rainfall;
-	}
-
-	public long getPressure() {
-		return pressure;
-	}
-
-	public void setPressure(long pressure) {
-		this.pressure = pressure;
-	}
+//	public void setPressure(long pressure) {
+//		this.pressure = pressure;
+//	}
 
 	public int getStatus() {
 		return status;
@@ -136,18 +105,15 @@ public class Reading {
         this.hum = reading.getHum();
         this.temp = reading.getTemp();
         this.volts = reading.getVolts();
-        this.lum = reading.getLum();
-        this.windDir = reading.getWindDir();
-        this.windSpeed = reading.getWindSpeed();
-        this.rainfall = reading.getRainfall();
-        this.pressure = reading.getPressure();
+        this.amps = reading.getAmps();
+        //this.pressure = reading.getPressure();
         this.status = reading.getStatus();
     }
 
 	@Override
 	public String toString() {
 		return "Reading [id=" + id + ", node=" + node + ", hum=" + hum + ", temp=" + temp + ", volts=" + volts
-				+ ", lum=" + lum + ", windDir=" + windDir + ", windSpeed=" + windSpeed + ", rainfall=" + rainfall
-				+ ", pressure=" + pressure + ", status=" + status + "]";
+				+ ", amps=" + amps //+ ", pressure=" + pressure
+				+ ", status=" + status + "]";
 	}
 }

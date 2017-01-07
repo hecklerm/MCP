@@ -10,11 +10,7 @@
     <script src="assets/raphael-2.1.4.min.js"></script>
     <script src="assets/justgage.js"></script>
     <script type='text/javascript'>
-        var lum;
-        var windDir;
-        var windSpeed;
-        var rainfall;
-        var pressure;
+//        var pressure;
         var IPData;
         var IPControl;
         var webSocket;
@@ -24,25 +20,10 @@
         var gTemp = new TimeSeries();
         var gHum = new TimeSeries();
         var gVolt = new TimeSeries();
+        var gAmp = new TimeSeries();
         var status = parseInt(-1);
 
         function init() {
-            windDir = new SegmentDisplay("windDir");
-            windDir.pattern = "###";
-            windDir.displayAngle = 6;
-            windDir.digitHeight = 20;
-            windDir.digitWidth = 14;
-            windDir.digitDistance = 2.5;
-            windDir.segmentWidth = 2;
-            windDir.segmentDistance = 0.3;
-            windDir.segmentCount = 7;
-            windDir.cornerType = 3;
-            windDir.colorOn = "#E5E5E5";
-            windDir.colorOff = "#2A4747";
-            windDir.draw();
-
-            document.getElementById("sensorD").style.display = "block";
-
             webSocketControl = new WebSocket(IPControl);
 
             webSocketControl.onmessage = function (event) {
@@ -112,8 +93,10 @@
             var json = JSON.parse(event.data);
             var time = new Date().getTime();
 
-            tempGauge.refresh(json.temp.toFixed(1));
+            tempGaugeC.refresh(json.temp.toFixed(1));
             gTemp.append(time, parseFloat(json.temp));
+
+            tempGaugeF.refresh((json.temp.toFixed(1) * 9) / 5 + 32);
 
             humidGauge.refresh(json.hum.toFixed(1));
             gHum.append(time, parseFloat(json.hum));
@@ -121,15 +104,10 @@
             voltGauge.refresh(json.volts.toFixed(3));
             gVolt.append(time, parseFloat(json.volts));
 
-            lumenGauge.refresh(json.lum.toFixed(2));
+            ampGauge.refresh(json.amps.toFixed(0));
+            gAmp.append(time, parseFloat(json.amps));
 
-            rainGauge.refresh(json.rainfall.toFixed(1));
-
-            windDir.setValue(pad((json.windDir).toString(), 3));
-
-            wspdGauge.refresh(json.windSpeed.toFixed(2));
-
-            pressGauge.refresh(json.pressure.toFixed(0));
+            //pressGauge.refresh(json.pressure.toFixed(0));
 
             if (json.status !== null) {
                 var st = parseInt(json.status);
@@ -316,6 +294,13 @@
                 lineWidth: 3
             });
 
+            gAmp.append(new Date().getTime(), 0);
+            chart.addTimeSeries(gAmp, {
+                strokeStyle: 'rgba(255, 255, 0, 1)',
+                fillStyle: 'rgba(255, 255, 0, 0.1)',
+                lineWidth: 3
+            });
+
             chart.streamTo(document.getElementById("chart"), 3000);
         }
 
@@ -356,27 +341,34 @@
 <div class="boxTitle" style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">
     <div style="text-align: center; padding: 10px;">Power Monitoring & Management in the Cloud</div>
 </div>
-<div id="tempGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="tempGaugeC" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="tempGaugeF" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
 <div id="humidGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
 <div id="voltGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
-<div id="lumenGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
-<div id="wspdGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
-<div id="sensorD" class="box-invisible" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;">
-    <div id='containerD' style='padding: 10px;'></div>
-    <div align="center" style="margin-top: 30px; font-size: x-large; font-weight: 700; color: darkgrey;">Wind Direction</div>
-    <canvas id="windDir" width="320" height="270"></canvas>
-</div>
-<div id="rainGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
-<div id="pressGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<div id="ampGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>
+<!--<div id="pressGauge" style="float: left; margin-top: 15px; margin-left: 15px; width: 320px; height: 330px;"></div>-->
 <script>
-    var tempGauge = new JustGage({
-        id: "tempGauge",
+    var tempGaugeC = new JustGage({
+        id: "tempGaugeC",
         value: -15,
         min: -15,
         max: 45,
         decimals: 1,
-        title: "Temperature",
+        title: "Temp Metric",
         label: "° C",
+        shadowSize: 15,
+        shadowVerticalOffset: 15,
+        shadowOpacity: 0.8
+    });
+
+    var tempGaugeF = new JustGage({
+        id: "tempGaugeF",
+        value: 5,
+        min: 5,
+        max: 113,
+        decimals: 1,
+        title: "Temp Imperial",
+        label: "° F",
         shadowSize: 15,
         shadowVerticalOffset: 15,
         shadowOpacity: 0.8
@@ -408,56 +400,30 @@
         shadowOpacity: 0.8
     });
 
-    var lumenGauge = new JustGage({
-        id: "lumenGauge",
+    var ampGauge = new JustGage({
+        id: "ampGauge",
         value: 0,
         min: 0,
-        max: 4,
-        decimals: 2,
-        title: "Lumens",
-        label: "w",
+        max: 1000,
+        decimals: 0,
+        title: "Current",
+        label: "mA",
         shadowSize: 15,
         shadowVerticalOffset: 15,
         shadowOpacity: 0.8
     });
 
-    var wspdGauge = new JustGage({
-        id: "wspdGauge",
-        value: 0,
-        min: 0,
-        max: 100,
-        decimals: 2,
-        title: "Wind Speed",
-        label: "mph",
-        shadowSize: 15,
-        shadowVerticalOffset: 15,
-        shadowOpacity: 0.8
-    });
-
-    var rainGauge = new JustGage({
-        id: "rainGauge",
-        value: 0,
-        min: 0,
-        max: 10,
-        decimals: 1,
-        title: "Hourly Rainfall",
-        label: "in",
-        shadowSize: 15,
-        shadowVerticalOffset: 15,
-        shadowOpacity: 0.8
-    });
-
-    var pressGauge = new JustGage({
-        id: "pressGauge",
-        value: 0,
-        min: 90000,
-        max: 110000,
-        title: "Atmospheric Pressure",
-        label: "Pa",
-        shadowSize: 15,
-        shadowVerticalOffset: 15,
-        shadowOpacity: 0.8
-    });
+//    var pressGauge = new JustGage({
+//        id: "pressGauge",
+//        value: 0,
+//        min: 90000,
+//        max: 110000,
+//        title: "Atmospheric Pressure",
+//        label: "Pa",
+//        shadowSize: 15,
+//        shadowVerticalOffset: 15,
+//        shadowOpacity: 0.8
+//    });
 </script>
 
 <div class="box" style="float: left; margin-top: 15px; margin-left: 15px; width: 340px; height: 370px;">
@@ -577,7 +543,7 @@
 <div style="clear: both"></div>
 <div class="boxTitle"
      style="position: relative; margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 15px;">
-    <div style="text-align: center; padding: 10px;">Mark Heckler 2016</div>
+    <div style="text-align: center; padding: 10px;">Mark Heckler 2017</div>
 </div>
 
 </body>
